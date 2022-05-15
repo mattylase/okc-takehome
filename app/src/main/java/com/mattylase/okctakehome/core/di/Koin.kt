@@ -1,8 +1,7 @@
 package com.mattylase.okctakehome.core.di
 
 import android.util.Log
-import com.mattylase.okctakehome.MainActivity
-import com.mattylase.okctakehome.extras.LogTag
+import com.mattylase.okctakehome.extras.logTag
 import com.mattylase.okctakehome.repository.Repository
 import com.mattylase.okctakehome.ui.common.TakehomeViewModel
 import io.ktor.client.*
@@ -17,18 +16,16 @@ import org.koin.core.annotation.KoinReflectAPI
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
+/**
+ * Koin is our DI system for the app. Dependencies are configured here and then supplied to the
+ * components lazily.
+ */
 @KoinReflectAPI
 val module = module {
     single { Repository() }
     single { Dispatchers.IO }
     httpClient()
-    database()
-
     viewModel<TakehomeViewModel>()
-
-//    single { get<AppDatabase>().newsArticleDao() }
-//    single { get<AppDatabase>().searchTopicDao() }
-    //single { Cache() }
 }
 
 fun Module.httpClient() = single {
@@ -37,7 +34,7 @@ fun Module.httpClient() = single {
         install(Logging) {
             logger = object : Logger {
                 override fun log(message: String) {
-                    Log.d(LogTag(), message)
+                    Log.d(logTag(), message)
                 }
             }
             this.level = LogLevel.ALL
@@ -50,8 +47,4 @@ fun Module.httpClient() = single {
             })
         }
     }
-}
-
-fun Module.database() = single {
-    //Room.databaseBuilder(get(), AppDatabase::class.java, "demo-db").build()
 }

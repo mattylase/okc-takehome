@@ -4,4 +4,7 @@
     <string name="text_match">%1$s%% Match</string>
     <string name="tab_label_special_blend">Special Blend</string>
     <string name="tab_label_match_percent">Match %</string>
+    <string name="toast_fetch_error">Failed to get matches! Please try again later.</string>
+    <string name="emoji_broken_heart">💔</string>
+    <string name="emoji_heart">❤️</string>
 </resources>

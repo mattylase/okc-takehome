@@ -8,17 +8,18 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.mattylase.okctakehome.ui.common.TakehomeViewModel
-import com.mattylase.okctakehome.ui.main.MatchFragment
-import com.mattylase.okctakehome.ui.main.SpecialBlendFragment
+import com.mattylase.okctakehome.ui.match.MatchFragment
+import com.mattylase.okctakehome.ui.specialblend.SpecialBlendFragment
 import org.koin.android.scope.AndroidScopeComponent
 import org.koin.androidx.scope.activityRetainedScope
-import org.koin.androidx.scope.activityScope
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.scope.Scope
 
 class MainActivity : FragmentActivity(), AndroidScopeComponent {
 
     override val scope: Scope by activityRetainedScope()
+
+    // not currently used in the activity, but setup to share with fragments
     val viewModel by viewModel<TakehomeViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +31,7 @@ class MainActivity : FragmentActivity(), AndroidScopeComponent {
         findViewById<ViewPager2>(R.id.viewPager).apply {
             adapter = PagesAdapter(this@MainActivity)
             TabLayoutMediator(tabs, this) { tab, pos ->
-                when(pos) {
+                when (pos) {
                     0 -> tab.text = getString(R.string.tab_label_special_blend)
                     1 -> tab.text = getString(R.string.tab_label_match_percent)
                 }

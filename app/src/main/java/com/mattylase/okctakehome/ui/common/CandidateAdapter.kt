@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -28,12 +29,18 @@ class CandidateAdapter : RecyclerView.Adapter<CandidateAdapter.CandidateViewHold
 
     override fun getItemCount(): Int = items.size
 
+    /**
+     * Update the entire list. Used for initial load & population of the Match % screen.
+     */
     fun updateAllCandidates(items: List<Candidate>) {
         this.items.clear()
         this.items.addAll(items)
-        notifyDataSetChanged()
+        notifyItemRangeChanged(0, items.size)
     }
 
+    /**
+     * Update a single candidate after it was liked
+     */
     fun updateCandidate(position: Int, candidate: Candidate) {
         if (position in items.indices) {
             items[position] = candidate
@@ -65,9 +72,6 @@ class CandidateAdapter : RecyclerView.Adapter<CandidateAdapter.CandidateViewHold
                     .centerCrop()
                     .into(this)
             }
-            itemView.setOnClickListener {
-
-            }
 
             updateCardBackground(candidate.liked)
             itemView.setOnClickListener {
@@ -76,12 +80,13 @@ class CandidateAdapter : RecyclerView.Adapter<CandidateAdapter.CandidateViewHold
         }
 
         private fun updateCardBackground(liked: Boolean) {
-            with(itemView) {
-                background = if (liked) {
-                    ResourcesCompat.getDrawable(context.resources, R.color.yellow, null)
+            with(itemView as CardView) {
+                val color = if (liked) {
+                    ResourcesCompat.getColor(context.resources, R.color.yellow, null)
                 } else {
-                    ResourcesCompat.getDrawable(context.resources, R.color.white, null)
+                    ResourcesCompat.getColor(context.resources, R.color.white, null)
                 }
+                setCardBackgroundColor(color)
             }
         }
     }

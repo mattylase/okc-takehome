@@ -1,4 +1,4 @@
-package com.mattylase.okctakehome.model
+package com.mattylase.okctakehome.repository.model
 
 import kotlinx.serialization.Serializable
 

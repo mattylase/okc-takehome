@@ -4,15 +4,14 @@ import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-class GridItemDecoration(spacing: Float, val gridWidth: Int): RecyclerView.ItemDecoration() {
+/**
+ * This class essentially controls the padding logic that is used to conform to the UI spec, or at
+ * least what I  could gather from the screenshots :)
+ */
+class GridItemDecoration(spacing: Float, var gridWidth: Int): RecyclerView.ItemDecoration() {
 
-    private val spacingValue: Int
-    private val halfSpacingValue: Int
-
-    init {
-        spacingValue = spacing.toInt()
-        halfSpacingValue = spacingValue / 2
-    }
+    private val spacingValue: Int = spacing.toInt()
+    private val halfSpacingValue: Int = spacingValue / 2
 
     override fun getItemOffsets(
         outRect: Rect,

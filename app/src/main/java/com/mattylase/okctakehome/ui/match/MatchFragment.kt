@@ -1,14 +1,13 @@
-package com.mattylase.okctakehome.ui.main
+package com.mattylase.okctakehome.ui.match
 
 import androidx.lifecycle.lifecycleScope
 import com.mattylase.okctakehome.ui.common.CandidateFragment
-import com.mattylase.okctakehome.ui.common.model.UpdateMode
 import kotlinx.coroutines.launch
 
 class MatchFragment: CandidateFragment() {
 
     override fun listenForUpdates() {
-        viewModel.listenForMatchUpdates()
+        viewModel.queryMatches()
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.matchScreenState.collect {
