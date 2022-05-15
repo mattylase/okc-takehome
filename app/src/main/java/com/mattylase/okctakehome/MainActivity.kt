@@ -31,8 +31,8 @@ class MainActivity : FragmentActivity(), AndroidScopeComponent {
             adapter = PagesAdapter(this@MainActivity)
             TabLayoutMediator(tabs, this) { tab, pos ->
                 when(pos) {
-                    0 -> tab.text = "Special Blend"
-                    1 -> tab.text = "Match %"
+                    0 -> tab.text = getString(R.string.tab_label_special_blend)
+                    1 -> tab.text = getString(R.string.tab_label_match_percent)
                 }
             }.attach()
         }

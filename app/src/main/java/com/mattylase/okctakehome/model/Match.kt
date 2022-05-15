@@ -7,17 +7,18 @@ import kotlinx.serialization.Serializable
 data class Match(
     val age: Int?,
     val is_online: Int?,
-    val liked: Boolean?,
+    var liked: Boolean?,
     val location: Location?,
     val match: Int?,
     val photo: Photo?,
-    val userid: String?,
+    val userid: String,
     val username: String?
 )
 
 fun Collection<Match>.toCandidatesList(): List<Candidate> {
     return map {
         Candidate(
+            id = it.userid,
             username = it.username ?: "",
             age = it.age?.toString() ?: "",
             city = it.location?.city_name ?: "",

@@ -2,4 +2,6 @@
     <string name="app_name">OKC Takehome</string>
     <string name="text_details">%1$s • %2$s, %3$s</string>
     <string name="text_match">%1$s%% Match</string>
+    <string name="tab_label_special_blend">Special Blend</string>
+    <string name="tab_label_match_percent">Match %</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.mattylase.okctakehome.ui.common
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -35,6 +36,11 @@ abstract class CandidateFragment : Fragment() {
             )
         }
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        listenForUpdates()
     }
 
     abstract fun listenForUpdates()

@@ -1,6 +1,7 @@
 package com.mattylase.okctakehome.ui.common.model
 
 data class Candidate(
+    val id: String,
     val username: String,
     val age: String,
     val city: String,
@@ -9,15 +10,3 @@ data class Candidate(
     val thumbUrl: String,
     val liked: Boolean
 )
-
-fun Candidate.default(): Candidate {
-    return Candidate(
-        username = "",
-        age = "",
-        city = "",
-        state = "",
-        matchPercentage = "",
-        thumbUrl = "",
-        liked = false
-    )
-}
