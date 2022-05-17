@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import coil.load
 import com.mattylase.okctakehome.R
 import com.mattylase.okctakehome.ui.common.model.Candidate
 
@@ -69,13 +69,15 @@ class CandidateAdapter : RecyclerView.Adapter<CandidateAdapter.CandidateViewHold
                 )
             }
             itemView.findViewById<ImageView>(R.id.candidateImage).run {
-                layout(0,0,0,0)
-                Glide.with(this)
-                    .load(candidate.thumbUrl)
-                    .placeholder(R.drawable.paw_placeholder)
-                    .error(R.drawable.not_found_error)
-                    .centerCrop()
-                    .into(this)
+                contentDescription =
+                    context.getString(R.string.content_desc_profile_pic, candidate.username)
+
+                load(candidate.thumbUrl) {
+                    crossfade(true)
+                    placeholder(R.drawable.paw_placeholder)
+                    error(R.drawable.not_found_error)
+                    transformations()
+                }
             }
 
             updateCardBackground(candidate.liked)

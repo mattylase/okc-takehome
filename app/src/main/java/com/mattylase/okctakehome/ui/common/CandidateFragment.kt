@@ -1,9 +1,7 @@
 package com.mattylase.okctakehome.ui.common
 
-import android.annotation.SuppressLint
 import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mattylase.okctakehome.R
 import com.mattylase.okctakehome.extras.gone
 import com.mattylase.okctakehome.extras.invisible
-import com.mattylase.okctakehome.extras.logTag
 import com.mattylase.okctakehome.extras.visible
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -62,7 +59,6 @@ abstract class CandidateFragment : Fragment() {
         listenForUpdates()
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         val count = resources.getInteger(R.integer.grid_span_count)
@@ -72,10 +68,6 @@ abstract class CandidateFragment : Fragment() {
             (it.getItemDecorationAt(0) as GridItemDecoration).gridWidth = count
             it.invalidateItemDecorations()
         }
-
-        // Given the user expects some slight delay on a rotation as-is, using this to give Glide a
-        // bump and to recalculate the image view bounds, since the cell size is dynamic
-        candidateAdapter?.notifyDataSetChanged()
     }
 
     // Given our structure and not transitioning fragments/activities, I don't think

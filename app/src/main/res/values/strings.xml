@@ -7,4 +7,6 @@
     <string name="toast_fetch_error">Failed to get matches! Please try again later.</string>
     <string name="emoji_broken_heart">💔</string>
     <string name="emoji_heart">❤️</string>
+
+    <string name="content_desc_profile_pic">A picture of %1$s</string>
 </resources>
