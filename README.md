@@ -21,3 +21,4 @@ With some more free time (my current job & home life are a bit overwhelming righ
 - Image framing isn't great on large devices, but I felt it was good enough for the scope of the assignment
 - Only some very simple unit testing is in place to state familiarity
 - There isn't any UI automation testing included, but would be nice to have
+- No app icon or anything of the sort is included
