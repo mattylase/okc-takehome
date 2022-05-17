@@ -25,16 +25,16 @@ class Repository : KoinComponent {
      * Grab the matches from the given api provided for the assignment
      */
     suspend fun fetchMatches(): List<Match>? {
-        try {
+        return try {
             val response = client.get { defaultRequestConfig(this) }.body<MatchesResponse>()
             cachedMatches = response.data
             // `likedUsers` would currently be empty without persistence, but this is here to make sure
             // that the UI logic worked as I intended during debugging, and for futureproofing
             cachedMatches.filter { likedUsers.contains(it.userid) }.forEach { it.liked = true }
-            return cachedMatches
+            cachedMatches
         } catch (t: Throwable) {
             Log.e(logTag(), "Failed getting the matches!", t)
-            return null
+            null
         }
     }
 

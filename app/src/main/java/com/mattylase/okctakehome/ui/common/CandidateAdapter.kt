@@ -30,7 +30,7 @@ class CandidateAdapter : RecyclerView.Adapter<CandidateAdapter.CandidateViewHold
     override fun getItemCount(): Int = items.size
 
     /**
-     * Update the entire list. Used for initial load & population of the Match % screen.
+     * Update the entire list. Used for initial load & population of the Match % screen
      */
     fun updateAllCandidates(items: List<Candidate>) {
         this.items.clear()
@@ -56,6 +56,8 @@ class CandidateAdapter : RecyclerView.Adapter<CandidateAdapter.CandidateViewHold
         fun bind(candidate: Candidate) {
             itemView.findViewById<TextView>(R.id.candidateUserName).text = candidate.username
             itemView.findViewById<TextView>(R.id.candidateMatchPercentage).run {
+                // assuming the number string returned from the API is actually a decimal at
+                // 2 digits of precision - just use the base decimal with no rounding
                 text = context.getString(R.string.text_match, candidate.matchPercentage.take(2))
             }
             itemView.findViewById<TextView>(R.id.candidateDetailsText).run {

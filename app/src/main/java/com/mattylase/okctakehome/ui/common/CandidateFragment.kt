@@ -61,21 +61,6 @@ abstract class CandidateFragment : Fragment() {
         listenForUpdates()
     }
 
-    override fun onPause() {
-        super.onPause()
-        Log.d(logTag(), "Saving baby")
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        Log.d(logTag(), "Saving baby")
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        Log.d(logTag(), "Saving baby")
-    }
-
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         val count = resources.getInteger(R.integer.grid_span_count)

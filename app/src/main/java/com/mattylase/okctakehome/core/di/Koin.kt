@@ -34,6 +34,7 @@ fun Module.httpClient() = single {
         install(Logging) {
             logger = object : Logger {
                 override fun log(message: String) {
+                    // just dumping everything from the network for ease of takehome development
                     Log.d(logTag(), message)
                 }
             }
