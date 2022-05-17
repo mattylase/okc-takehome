@@ -69,6 +69,7 @@ class CandidateAdapter : RecyclerView.Adapter<CandidateAdapter.CandidateViewHold
                 )
             }
             itemView.findViewById<ImageView>(R.id.candidateImage).run {
+                layout(0,0,0,0)
                 Glide.with(this)
                     .load(candidate.thumbUrl)
                     .placeholder(R.drawable.paw_placeholder)
