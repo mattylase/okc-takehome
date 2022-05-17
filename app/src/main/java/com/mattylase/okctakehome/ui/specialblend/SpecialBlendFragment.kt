@@ -19,10 +19,10 @@ class SpecialBlendFragment : CandidateFragment() {
             viewModel.specialBlendScreenState.collect {
                 when (it.updateMode) {
                     is UpdateMode.All -> {
-                        candidateAdapter.updateAllCandidates(it.candidates)
+                        candidateAdapter?.updateAllCandidates(it.candidates)
                     }
                     is UpdateMode.Single -> {
-                        candidateAdapter.updateCandidate(
+                        candidateAdapter?.updateCandidate(
                             it.updateMode.position,
                             it.candidates[it.updateMode.position]
                         )
@@ -44,9 +44,17 @@ class SpecialBlendFragment : CandidateFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        candidateAdapter.setOnClickListener(::onCandidateClick)
+        candidateAdapter?.setOnClickListener(::onCandidateClick)
     }
 
+    /**
+     * Given that we're maintaining this state locally, we're going to allow the repo to be updated,
+     * and then notify the UI that it should be changed to yellow/white.
+     *
+     * If we were performing a network call here, we'd probably want to update the color immediately
+     * and it would naturally revert via the backing data not updating if the network call were to
+     * fail, as this is how team's I've been on have implemented "Likes" in the past
+     */
     private fun onCandidateClick(position: Int, id: String) {
         viewModel.onCandidateClick(position, id)
     }

@@ -21,14 +21,13 @@ import org.koin.core.component.inject
  */
 class TakehomeViewModel(private val dispatcher: CoroutineDispatcher) : ViewModel(), KoinComponent {
 
-    val minLoadingTimeMillis = 1800
+    private val minLoadingTimeMillis = 1800
     private val repo by inject<Repository>()
     val specialBlendScreenState = MutableStateFlow(CandidateScreenState.default())
     val matchScreenState = MutableStateFlow(CandidateScreenState.default())
 
     /**
      * Fetches the candidates that populate the "special blend" tab.
-     * Added some simple delay
      */
     fun querySpecialBlends() {
         viewModelScope.launch(dispatcher) {
@@ -47,6 +46,7 @@ class TakehomeViewModel(private val dispatcher: CoroutineDispatcher) : ViewModel
                 networkError = true,
                 loading = false
             )
+            // some simple delay logic to make sure the loading process looks smooth
             val diff = System.currentTimeMillis() - startTime
             if (diff < minLoadingTimeMillis) {
                 delay(minLoadingTimeMillis - diff)
@@ -74,7 +74,7 @@ class TakehomeViewModel(private val dispatcher: CoroutineDispatcher) : ViewModel
 
     /**
      * When clicked, we update the Repository's understanding of the "liked" users, and then
-     * re-propogate a CandidateScreenState that reflects the repository's new understanding of the
+     * re-propagate a CandidateScreenState that reflects the repository's new understanding of the
      * backing data
      */
     fun onCandidateClick(position: Int, id: String) {

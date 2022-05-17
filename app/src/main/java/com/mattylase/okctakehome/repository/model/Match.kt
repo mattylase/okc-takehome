@@ -15,6 +15,7 @@ data class Match(
     val username: String?
 )
 
+// Convert the network's idea of a "match" into the UI's idea of a "candidate"
 fun Collection<Match>.toCandidatesList(): List<Candidate> {
     return map {
         Candidate(

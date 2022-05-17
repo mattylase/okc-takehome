@@ -6,13 +6,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mattylase.okctakehome.R
+import com.mattylase.okctakehome.extras.gone
+import com.mattylase.okctakehome.extras.invisible
 import com.mattylase.okctakehome.extras.logTag
+import com.mattylase.okctakehome.extras.visible
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 /**
@@ -22,11 +24,11 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
  */
 abstract class CandidateFragment : Fragment() {
 
-    lateinit var candidateAdapter: CandidateAdapter
-    lateinit var recyclerView: RecyclerView
-    lateinit var loadingView: View
-    lateinit var errorView: View
     val viewModel by sharedViewModel<TakehomeViewModel>()
+    var candidateAdapter: CandidateAdapter? = null
+    private var recyclerView: RecyclerView? = null
+    private var loadingView: View? = null
+    private var errorView: View? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,37 +61,64 @@ abstract class CandidateFragment : Fragment() {
         listenForUpdates()
     }
 
+    override fun onPause() {
+        super.onPause()
+        Log.d(logTag(), "Saving baby")
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        Log.d(logTag(), "Saving baby")
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        Log.d(logTag(), "Saving baby")
+    }
+
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         val count = resources.getInteger(R.integer.grid_span_count)
-        (recyclerView.layoutManager as GridLayoutManager).spanCount = count
-        (recyclerView.getItemDecorationAt(0) as GridItemDecoration).gridWidth = count
-        recyclerView.invalidateItemDecorations()
+
+        recyclerView?.let {
+            (it.layoutManager as GridLayoutManager).spanCount = count
+            (it.getItemDecorationAt(0) as GridItemDecoration).gridWidth = count
+            it.invalidateItemDecorations()
+        }
+    }
+
+    // Given our structure and not transitioning fragments/activities, I don't think
+    // these will leak, but futureproofing it anyway
+    override fun onDestroyView() {
+        super.onDestroyView()
+        recyclerView = null
+        errorView = null
+        loadingView = null
+        candidateAdapter = null
     }
 
     protected fun showLoadingView() {
-        recyclerView.visibility = View.INVISIBLE
-        errorView.visibility = View.GONE
-        loadingView.visibility = View.VISIBLE
+        recyclerView.invisible()
+        errorView.gone()
+        loadingView.visible()
         AnimationUtils.loadAnimation(context, R.anim.heart_beat).also {
-            loadingView.startAnimation(it)
+            loadingView?.startAnimation(it)
         }
     }
 
     protected fun showRecyclerView() {
-        recyclerView.visibility = View.VISIBLE
-        errorView.visibility = View.GONE
-        loadingView.clearAnimation()
-        loadingView.visibility = View.INVISIBLE
+        recyclerView.visible()
+        errorView.gone()
+        loadingView?.clearAnimation()
+        loadingView.invisible()
     }
 
     protected fun showErrorView() {
-        recyclerView.visibility = View.INVISIBLE
-        errorView.visibility = View.VISIBLE
-        loadingView.clearAnimation()
-        loadingView.visibility = View.INVISIBLE
+        recyclerView.invisible()
+        errorView.visible()
+        loadingView?.clearAnimation()
+        loadingView.invisible()
     }
 
     abstract fun listenForUpdates()
-
 }

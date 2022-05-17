@@ -1,6 +1,7 @@
 package com.mattylase.okctakehome.repository
 
 import android.util.Log
+import androidx.annotation.VisibleForTesting
 import com.mattylase.okctakehome.extras.Constants
 import com.mattylase.okctakehome.extras.logTag
 import com.mattylase.okctakehome.repository.model.Match
@@ -68,7 +69,8 @@ class Repository : KoinComponent {
         }
     }
 
-    private fun defaultRequestConfig(builder: HttpRequestBuilder) = with(builder) {
+    @VisibleForTesting
+    fun defaultRequestConfig(builder: HttpRequestBuilder) = with(builder) {
         url {
             host = Constants.matchesHost
             encodedPath = Constants.matchesPath

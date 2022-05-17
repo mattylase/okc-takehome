@@ -1,6 +1,7 @@
 package com.mattylase.okctakehome
 
 import android.os.Bundle
+import android.os.PersistableBundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -50,5 +51,4 @@ class PagesAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fr
             else -> throw IllegalStateException("We only support 2 pages!")
         }
     }
-
 }

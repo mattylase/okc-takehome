@@ -69,6 +69,8 @@ class CandidateAdapter : RecyclerView.Adapter<CandidateAdapter.CandidateViewHold
             itemView.findViewById<ImageView>(R.id.candidateImage).run {
                 Glide.with(this)
                     .load(candidate.thumbUrl)
+                    .placeholder(R.drawable.paw_placeholder)
+                    .error(R.drawable.not_found_error)
                     .centerCrop()
                     .into(this)
             }

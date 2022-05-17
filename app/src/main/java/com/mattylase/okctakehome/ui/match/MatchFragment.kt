@@ -11,7 +11,7 @@ class MatchFragment: CandidateFragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.matchScreenState.collect {
-                candidateAdapter.updateAllCandidates(it.candidates)
+                candidateAdapter?.updateAllCandidates(it.candidates)
             }
         }
     }
