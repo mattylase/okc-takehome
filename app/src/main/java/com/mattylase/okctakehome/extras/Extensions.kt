@@ -1,7 +1,6 @@
 package com.mattylase.okctakehome.extras
 
 import android.view.View
-import androidx.fragment.app.Fragment
 
 /**
  * Little log tag convenience that's simpler than something like Timber for the size/scope of this
