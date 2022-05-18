@@ -1,7 +1,7 @@
 ## Matt Laser's Takehome App
 
 ### Overview
-This app contains a minimal implementation of the given spec. There are two fragments, `SpecialBlendFragment` and `MatchFragment` that make up the main pieces of the UI. These fragments live in a `ViewPager2` owned by the `MainActivity`. Network access is done from the `Repository`, and coordination/updating of the data is done by the `TakehomeViewModel`. The `CandidateAdapter` contains all of the scrollable UI detailed in the spec.
+This app contains a minimal implementation of the given spec. There are two fragments, `SpecialBlendFragment` and `MatchFragment` that make up the main pieces of the UI. These fragments live in a `ViewPager2` owned by the `MainActivity`. Network access is done from the `Repository`, and coordination/updating of the data is done by the `TakehomeViewModel`. The `CandidateAdapter` contains all of the scrollable UI detailed in the spec. Finally, I've set up some barebones unit testing and CI via [Gitlab Actions](https://github.com/mattylase/okc-takehome/actions).
 
 
 ## Libraries / Concepts
